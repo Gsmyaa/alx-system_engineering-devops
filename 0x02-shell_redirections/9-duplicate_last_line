@@ -1,2 +1,2 @@
 #!/bin/bash
-sort < iacta | tail | head -10 | tail -10 >> iacta > 
+tail iacta | head -10 | tail +10 >> iacta 
