@@ -1,19 +1,4 @@
 #!/usr/bin/env bash
 # displays all active IPv4 addresses
 
-# get network interfaces
-net_interfaces=$(ip -o -4 addr show | awk '{print $2}')
-
-# loop over each interface and its ip addresses
-for interface in $net_interfaces; do
-    # Skip loopback interface
-    if [[ $interface == "lo" ]]; then
-        continue
-    fi
-
-    # get the ip addresses for the interface
-    ip_addr=$(ip -o -4 addr show dev $interface | awk '{print $4}')
-
-    # print ip addresses
-    echo $ip_addr
-done
+ifconfig | grep -Eo "inet (addr:)?([0-9]*\.){3}[0-9]*" | cut -b 11-
