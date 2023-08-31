@@ -21,5 +21,5 @@ if [$# -ge 4];
 then
     scp -i $key_path $file_path $username@$ip:~/
 else
-    scp -i $file_path $username@$ip:~/
+    scp $file_path $username@$ip:~/
 fi;
