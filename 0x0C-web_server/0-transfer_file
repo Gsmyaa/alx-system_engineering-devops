@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# just transferring file to a server
+
+if [$# -lt 3];
+then
+    echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY";
+    exit;
+fi;
+
+# getting the paramaters
+file_path=$1
+ip=$2
+username=$3
+key_path=$4
+
+# Disabling strict host key checking
+ssh -o StrictHostKeyChecking=no $username@$ip
+
+# transferring the file
+if [$# -ge 4];
+then
+    scp -i $key_path $file_path $username@$ip:~/
+else
+    scp -i $file_path $username@$ip:~/
+fi;
