@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#configuring localhost to resolve to 127.0.0.2
+# configuring facebook.com to resolve to 8.8.8.8
+
+# Backuping the original
+cp /etc/hosts ~/hosts.new
+
+# modify localhost
+sed -i 's/127.*$/127.0.0.2 localhost\n8.8.8.8 facebook.com/' ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
