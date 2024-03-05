@@ -3,24 +3,22 @@
  Prints the titles of top-ten for a given subreddit.
 '''
 import requests
+from sys import argv
 
 
 def top_ten(subreddit):
     '''
-    Top 10 posts  in subreddit
+        returns the top 10 posts for a given subreddit
     '''
-    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    user_agent = 'reddit_user'
+    user = {'User-Agent': 'geda'}
+    url = requests.get('https://www.reddit.com/r/{}/hot/.json?limit=10'
+                       .format(subreddit), headers=user).json()
+    try:
+        for post in url.get('data').get('children'):
+            print(post.get('data').get('title'))
+    except Exception:
+        print(None)
 
-    headers = {'User-Agent': user_agent}
 
-    req = requests.get(url, headers=headers, allow_redirects=False)
-
-    if req.status_code != 200:
-        print('None')
-    else:
-        data = req.json()['data']
-        post_list = data['children']
-
-        for posts in post_list[0:10]:
-            print(posts['data']['title'])
+if __name__ == "__main__":
+    top_ten(argv[1])
