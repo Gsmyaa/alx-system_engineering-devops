@@ -9,7 +9,7 @@ import requests
 
 def recurse(subreddit, hot_list=[], after=None, count=0):
     '''
-    return list count of hot articles Recursivly. 
+    return list count of hot articles Recursivly.
     '''
 
     url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
